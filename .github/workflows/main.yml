@@ -17,6 +17,9 @@ jobs:
         uses: s-weigand/setup-conda@v1.0.5
         with:
           python-version: 3.6
+      - name: Install weasyprint
+        run: |
+          conda install -c conda-forge weasyprint
       - name: Build
         run: |
           docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll build
