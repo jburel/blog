@@ -18,13 +18,13 @@ save_all_content_to_pdf:
 	--margin-top 20mm \
 	--margin-bottom 20mm \
 	--footer-html http://127.0.0.1:4000/public/pdf_footer.html \
-	toc http://127.0.0.1:4000/all_content/ o2r_project_website_and_blog.pdf
+	toc http://127.0.0.1:4000/all_content/ blog.pdf
 
 capture_pdf:
 	make serve & ( sleep 5 && make save_all_content_to_pdf ; echo "Captured PDF"; )
 
 capture_zip:
-	git archive --format=zip HEAD -o o2r_project_website_and_blog_git-repository.zip
+	git archive --format=zip HEAD -o blog_git-repository.zip
 
 update_zenodo_deposit: build capture_pdf capture_zip
 	python3 $(shell pwd)/zenodo_release.py;
