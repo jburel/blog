@@ -24,6 +24,10 @@ jobs:
         run: |
           docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll build
           docker run --rm -v $(pwd)/_site:/site jekyll/builder:pages /usr/gem/bin/htmlproofer /site --disable-external
+      - name: Start
+        run: |
+          docker run --rm -p 4000:4000 -v $PWD:/srv/jekyll jekyll/builder:pages jekyll server -w
+          slepp 5
       - name: Capture page as PDF
         run: weasyprint http://127.0.0.1:4000/ blog.pdf
       - name: Check output
