@@ -16,8 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
             sudo apt-get install -y --no-install-recommends \
-            python3-pip libcurl4-openssl-dev xvfb qt5-default xkb-data x11-xkb-utils \
-            ruby-full build-essential zlib1g-dev
+            python3-pip xvfb
             
             wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
             sudo dpkg -i wkhtmltox_0.12.6-1.focal_amd64.deb
