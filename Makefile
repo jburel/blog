@@ -1,7 +1,8 @@
 all: clean serve_drafts
 
 serve:
-	./docker_startup.sh
+	docker run --rm -p 4000:4000 -v $PWD:/srv/jekyll jekyll/builder:pages jekyll server -w
+
 clean:
 	docker run --rm -v $PWD:/srv/jekyll jekyll/builder:pages jekyll clean;
 	rm -f o2r_project_website_and_blog.pdf;
