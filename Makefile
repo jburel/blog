@@ -12,12 +12,7 @@ build: clean
 	docker run --rm -v $PWD:/srv/jekyll jekyll/builder:pages jekyll build
 
 save_content_to_pdf:
-	wkhtmltopdf \
-	--outline \
-	--javascript-delay 20000 --no-stop-slow-scripts \
-	--margin-top 20mm \
-	--margin-bottom 20mm \
-	http://127.0.0.1:4000 blog.pdf
+	weasyprint http://127.0.0.1:4000/ blog.pdf
 
 capture_pdf:
 	make serve & ( sleep 5 && make save_content_to_pdf ; echo "Captured PDF"; )
