@@ -33,7 +33,6 @@ jobs:
             export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
             xvfb-run make capture_pdf
             make capture_zip
-            pkill -f jekyll;
       - name: Check output
         run: ls
       - name: Upload Artifacts
