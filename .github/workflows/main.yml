@@ -15,9 +15,15 @@ jobs:
       - uses: actions/setup-python@v2
       - name: Install dependencies
         run: |
-            sudo apt-get update
             sudo apt-get install -y --no-install-recommends \
-             python3-pip xvfb qt5-default xkb-data x11-xkb-utils
+            python3-pip libcurl4-openssl-dev xfonts-base xfonts-75dpi xvfb qt5-default xkb-data x11-xkb-utils \
+            ruby-full build-essential zlib1g-dev
+            
+            wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+            sudo dpkg -i wkhtmltox_0.12.6-1.focal_amd64.deb
+            pip3 install --user --upgrade pip
+            pip3 install --user requests
+            pip3 install --user coloredlogs
       - name: Build
         run: |
           docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll build
