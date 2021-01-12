@@ -32,6 +32,8 @@ jobs:
         run: |
           export DISPLAY=localhost:1.0
           xvfb-run make capture_pdf
+      - name: Zip repository
+        run: make capture_zip
       - name: Check output
         run: ls
       - name: Upload Artifacts
