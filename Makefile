@@ -1,21 +1,14 @@
 all: clean serve_drafts
 
 serve:
-	bundle exec jekyll serve
-
-debug:
-	bundle exec jekyll serve --draft --verbose
-
-serve_drafts:
-	bundle exec jekyll serve --draft --unpublished
-
+	docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll serve
 clean:
-	bundle exec jekyll clean;
+	docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll clean;
 	rm -f o2r_project_website_and_blog.pdf;
 	rm -f o2r_project_website_and_blog_git-repository.zip;
 
 build: clean
-	bundle exec jekyll build
+	docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll build
 
 save_all_content_to_pdf:
 	wkhtmltopdf \
