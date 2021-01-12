@@ -13,6 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends xvfb
       - name: setup-conda
         uses: s-weigand/setup-conda@v1.0.5
         with:
@@ -24,12 +28,10 @@ jobs:
         run: |
           docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll build
           docker run --rm -v $(pwd)/_site:/site jekyll/builder:pages /usr/gem/bin/htmlproofer /site --disable-external
-      - name: Start
-        run: |
-          docker run --rm -p 4000:4000 -v $PWD:/srv/jekyll jekyll/builder:pages jekyll server -w
-          slepp 5
       - name: Capture page as PDF
-        run: weasyprint http://127.0.0.1:4000/ blog.pdf
+        run: |
+          export DISPLAY=localhost:1.0
+          xvfb-run make capture_pdf
       - name: Check output
         run: ls
       - name: Upload Artifacts
