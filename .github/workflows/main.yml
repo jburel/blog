@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-python@v2
       - name: Install dependencies
         run: |
-            sudo apt-get install -y --no-install-recommends \
+            sudo apt-get install -y --no-install-recommends xfonts-75dpi xfonts-base\
             python3-pip xvfb
             
             wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
