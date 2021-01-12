@@ -12,7 +12,7 @@ build: clean
 	docker run --rm -v $PWD:/srv/jekyll jekyll/builder:pages jekyll build
 
 save_content_to_pdf:
-	weasyprint http://127.0.0.1:4000/ blog.pdf
+	weasyprint http://0.0.0.0:4000 blog.pdf
 
 capture_pdf:
 	make serve & ( sleep 5 && make save_content_to_pdf ; echo "Captured PDF"; )
