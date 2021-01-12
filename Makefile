@@ -1,14 +1,14 @@
 all: clean serve_drafts
 
 serve:
-	docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll serve
+	./docker_startup.sh
 clean:
-	docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll clean;
+	docker run --rm -v $PWD:/srv/jekyll jekyll/builder:pages jekyll clean;
 	rm -f o2r_project_website_and_blog.pdf;
 	rm -f o2r_project_website_and_blog_git-repository.zip;
 
 build: clean
-	docker run --rm -v $PWD:/srv/jekyll -eJEKYLL_UID=$UID jekyll/builder:pages jekyll build
+	docker run --rm -v $PWD:/srv/jekyll jekyll/builder:pages jekyll build
 
 save_all_content_to_pdf:
 	wkhtmltopdf \
