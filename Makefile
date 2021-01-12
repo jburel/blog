@@ -11,17 +11,16 @@ clean:
 build: clean
 	docker run --rm -v $PWD:/srv/jekyll jekyll/builder:pages jekyll build
 
-save_all_content_to_pdf:
+save_content_to_pdf:
 	wkhtmltopdf \
 	--outline \
 	--javascript-delay 20000 --no-stop-slow-scripts \
 	--margin-top 20mm \
 	--margin-bottom 20mm \
-	--footer-html http://127.0.0.1:4000/public/pdf_footer.html \
-	toc http://127.0.0.1:4000/index blog.pdf
+	http://127.0.0.1:4000/index.html blog.pdf
 
 capture_pdf:
-	make serve & ( sleep 5 && make save_all_content_to_pdf ; echo "Captured PDF"; )
+	make serve & ( sleep 5 && make save_content_to_pdf ; echo "Captured PDF"; )
 
 capture_zip:
 	git archive --format=zip HEAD -o blog_git-repository.zip
